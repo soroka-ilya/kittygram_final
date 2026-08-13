@@ -13,7 +13,7 @@ services:
       - pg_data:/var/lib/postgresql/data
 
   backend:
-    build: ./backend/
+    image: sorokailya/kittygram_backend:latest
     env_file: .env
     volumes:
       - static:/app/staticfiles/
@@ -22,14 +22,14 @@ services:
       - db
 
   frontend:
-    build: ./frontend/
+    image: sorokailya/kittygram_frontend:latest
     env_file: .env
     command: cp -r /app/build/. /staticfiles/
     volumes:
       - static:/staticfiles
 
   gateway:
-    build: ./nginx/
+    image: sorokailya/kittygram_gateway:latest
     env_file: .env
     ports:
       - 9000:80
