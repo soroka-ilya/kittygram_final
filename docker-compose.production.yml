@@ -8,12 +8,14 @@ volumes:
 services:
   db:
     image: postgres:13
+    restart: always
     env_file: .env
     volumes:
       - pg_data:/var/lib/postgresql/data
 
   backend:
     image: sorokailya/kittygram_backend:latest
+    restart: always
     env_file: .env
     volumes:
       - static:/app/staticfiles/
@@ -23,6 +25,7 @@ services:
 
   frontend:
     image: sorokailya/kittygram_frontend:latest
+    restart: always
     env_file: .env
     command: cp -r /app/build/. /staticfiles/
     volumes:
@@ -30,6 +33,7 @@ services:
 
   gateway:
     image: sorokailya/kittygram_gateway:latest
+    restart: always
     env_file: .env
     ports:
       - 9000:80
